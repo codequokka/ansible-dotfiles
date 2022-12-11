@@ -1,0 +1,34 @@
+---
+- name: Set up my linux pc
+  hosts: localhost
+  become: true
+  roles:
+    - role: common
+      tags: common
+
+    - role: ssh
+      tags: ssh
+
+    - role: git
+      tags: git
+
+    - role: tmux
+      tags: tmux
+
+    - role: zsh
+      tags: zsh
+
+    - role: nvim
+      tags: nvim
+
+    - role: vscode
+      tags: vscode
+
+    - role: docker
+      tags: docker
+
+    - role: python3
+      tags: python3
+
+    - role: ansible
+      tags: ansible

@@ -1,0 +1,3 @@
+---
+- name: Set up nvim
+  ansible.builtin.import_tasks: setup_nvim.yml

@@ -1,0 +1,32 @@
+---
+- name: Copy bin files
+  ansible.builtin.copy:
+    src: nvim
+    dest: /home/{{ user }}/.bin/
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0755
+
+- name: Install OS packages
+  ansible.builtin.package:
+    name: "{{ item }}"
+  with_items:
+    - "@Development tools"
+
+- name: Install NvChad
+  ansible.builtin.git:
+    repo: "https://github.com/NvChad/NvChad"
+    dest: /home/{{ user }}/.config/nvim
+    depth: 1
+    update: false
+  become: false
+  tags:
+    - skip_ansible_lint
+
+- name: Copy NvChad custom setting files
+  ansible.builtin.copy:
+    src: custom
+    dest: /home/{{ user }}/.config/nvim/lua
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0755

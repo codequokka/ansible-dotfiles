@@ -1,0 +1,58 @@
+---
+- name: Install OS packages
+  ansible.builtin.package:
+    name:
+      - zsh
+
+- name: Copy setting files
+  ansible.builtin.copy:
+    src: "{{ item.target }}"
+    dest: /home/{{ user }}/.{{ item.target }}
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: "{{ item.mode }}"
+  with_items:
+    - { target: zshrc, mode: "0664" }
+    - { target: zshenv, mode: "0664" }
+    - { target: zsh/, mode: "0775" }
+
+- name: Install Zinit
+  become: true
+  become_user: "{{ user }}"
+  ansible.builtin.shell:
+    cmd: |
+      #!/bin/bash
+      ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+      if [ ! -d $ZINIT_HOME ]; then
+        mkdir -p "$(dirname $ZINIT_HOME)"
+        git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+      fi
+
+      exit 0
+  changed_when: false
+
+- name: Change default shell
+  ansible.builtin.user:
+    name: "{{ user }}"
+    shell: "{{ shell }}"
+
+- name: Copy bin files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ user }}/.bin/{{ item }}
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0755
+  with_items:
+    - bat
+    - delta
+    - direnv
+    - exa
+    - fd
+    - fzf
+    - jq
+    - lsd
+    - rg
+    - rga
+    - yq

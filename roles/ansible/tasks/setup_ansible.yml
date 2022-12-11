@@ -1,0 +1,12 @@
+---
+- name: Install OS packages
+  ansible.builtin.package:
+    name: "{{ item }}"
+  with_items:
+    - ansible-core
+
+- name: Install pip packages
+  ansible.builtin.pip:
+    name: "{{ item }}"
+  with_items:
+    - ansible-lint

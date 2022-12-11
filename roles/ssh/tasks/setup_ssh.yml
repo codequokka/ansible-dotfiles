@@ -1,0 +1,22 @@
+---
+- name: Modify sshd settings
+  ansible.builtin.lineinfile:
+    dest: /etc/ssh/sshd_config
+    state: present
+    backrefs: true
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+  with_items:
+    - regexp: '^#?\s*PermitRootLogin'
+      line: 'PermitRootLogin no'
+    - regexp: '^PasswordAuthentication yes'
+      line: 'PasswordAuthentication no'
+    - regexp: '^#?\s*PubkeyAuthentication'
+      line: 'PubkeyAuthentication yes'
+  notify:
+    - Restart sshd
+
+# - name: Add authorized key
+#   ansible.posix.authorized_key:
+#     user: "{{ user }}"
+#     key: "{{ public_key }}"

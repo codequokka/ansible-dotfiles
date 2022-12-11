@@ -1,0 +1,55 @@
+// Place your key bindings in this file to override the defaults
+[
+    // Workbench/QuickOpen
+    {
+        "key": "ctrl+n",
+        "command": "workbench.action.quickOpenNavigateNext",
+        "when": "inQuickOpen"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpenNavigatePrevious",
+        "when": "inQuickOpen"
+    },
+    // Workbench/SideBar
+    {
+        "key": "shift+alt+b",
+        "command": "workbench.action.toggleSidebarVisibility"
+    },
+    {
+        "key": "ctrl+b",
+        "command": "-workbench.action.toggleSidebarVisibility"
+    },
+    // Editor
+    {
+        "key": "ctrl+shift+h",
+        "command": "editor.action.showHover",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+shift+q",
+        "command": "editor.action.quickFix",
+        "when": "editorTextFocus"
+    },
+    // Terminal
+    {
+        "key": "ctrl+\\",
+        "command": "workbench.action.terminal.focusAtIndex1",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "ctrl+\\",
+        "command": "workbench.action.focusFirstEditorGroup",
+        "when": "terminalFocus"
+    },
+    // Test
+    {
+        "key": "ctrl+shift+t",
+        "command": "testing.runAll"
+    },
+    // Git
+    {
+        "key": "ctrl+shift+d",
+        "command": "git.openChange"
+    }
+]

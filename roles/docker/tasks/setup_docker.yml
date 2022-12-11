@@ -1,0 +1,48 @@
+---
+- name: Uninstall OS packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    state: absent
+  with_items:
+    - podman
+
+- name: Add OS package repo
+  ansible.builtin.command:
+    cmd: dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+  args:
+    creates: /etc/yum.repos.d/docker-ce.repo
+
+- name: Install OS packages
+  ansible.builtin.dnf:
+    name: "{{ item }}"
+    allowerasing: true
+  with_items:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+
+- name: Restart services
+  ansible.builtin.service:
+    name: "{{ item }}"
+    state: started
+    enabled: true
+  with_items:
+    - docker
+
+- name: Add users to docker group
+  ansible.builtin.user:
+    name: "{{ item }}"
+    groups: docker
+    append: true
+  with_items:
+    - "{{ user }}"
+
+- name: Copy bin files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ user }}/.bin/{{ item }}
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0755
+  with_items:
+    - docker-compose

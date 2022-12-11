@@ -1,0 +1,9 @@
+---
+- name: Check OS requirements
+  ansible.builtin.import_tasks: check_requirements.yml
+
+- name: Update OS packages
+  ansible.builtin.import_tasks: update_packages.yml
+
+- name: Set up common
+  ansible.builtin.import_tasks: setup_common.yml

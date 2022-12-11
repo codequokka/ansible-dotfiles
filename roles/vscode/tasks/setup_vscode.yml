@@ -1,0 +1,21 @@
+---
+- name: Copy rpm files
+  copy:
+    src: "{{ item }}"
+    dest: /tmp/{{ item }}
+  with_items:
+    - code-1.74.0-1670260117.el7.x86_64.rpm
+
+- name: Install rpm packages
+  dnf:
+    name: /tmp/{{ item }}
+  with_items:
+    - code-1.74.0-1670260117.el7.x86_64.rpm
+
+- name: Copy settig files
+  copy:
+    src: "{{ item }}"
+    dest: /home/nbchk/.config/Code/User/{{ item }}
+  with_items:
+    - settings.json
+    - keybindings.json

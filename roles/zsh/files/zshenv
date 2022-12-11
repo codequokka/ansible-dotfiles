@@ -1,0 +1,26 @@
+typeset -U path PATH
+
+path=(
+  ~/.bin
+  ~/.cargo/bin
+  /usr/local/go/bin
+  ~/go/bin
+  ~/.local/bin
+# ~/.sh
+#  ~/.guard/bin
+#  ~/.tfenv/bin
+#   ${GOPATH}/bin
+  $path
+)
+
+fpath=(
+  ~/.zsh/functions
+  $fpath
+)
+
+export EDITOR='nvim'
+export WORDCHARS='*?_.[]~-=&;!#$%^(){}<>'
+
+export FZF_DEFAULT_OPTS='--exact --height 50% --reverse --border --bind=ctrl-k:kill-line'
+
+export PIPENV_VENV_IN_PROJECT=1

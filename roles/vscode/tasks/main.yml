@@ -1,0 +1,4 @@
+---
+- name: Set up git
+  ansible.builtin.import_tasks: setup_vscode.yml
+  when: ansible_facts['distribution'] == "Rocky" and ansible_facts['distribution_major_version'] == "8"

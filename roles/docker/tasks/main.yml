@@ -1,0 +1,4 @@
+---
+- name: Set up docker
+  ansible.builtin.import_tasks: setup_docker.yml
+  when: ansible_facts['distribution'] == "Rocky" and ansible_facts['distribution_major_version'] == "8"

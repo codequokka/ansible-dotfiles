@@ -1,0 +1,264 @@
+# -----------------------------------------------------------------------------
+# Zinit
+# -----------------------------------------------------------------------------
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+source "${ZINIT_HOME}/zinit.zsh"
+
+# Theme
+zinit ice depth"1"
+zinit light romkatv/powerlevel10k
+
+# Syntax highlighting
+zinit ice depth"1"
+zinit light zdharma-continuum/fast-syntax-highlighting
+
+# Cd
+zinit ice depth"1"
+zinit light b4b4r07/enhancd
+
+zinit ice depth"1"
+zinit light mollifier/cd-gitroot
+
+# Completion
+zinit ice depth"1"
+zinit light zsh-users/zsh-completions
+
+zinit ice depth"1"
+zinit light zsh-users/zsh-autosuggestions
+
+zinit ice depth"1"
+zinit light Aloxaf/fzf-tab
+
+
+# -----------------------------------------------------------------------------
+# Powerlevel10k
+# -----------------------------------------------------------------------------
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# -----------------------------------------------------------------------------
+# Zoxide
+# -----------------------------------------------------------------------------
+# eval "$(zoxide init zsh)"
+
+
+# -----------------------------------------------------------------------------
+# Keybinding
+# -----------------------------------------------------------------------------
+stty stop undef
+
+bindkey -e
+
+
+# -----------------------------------------------------------------------------
+# Alias
+# -----------------------------------------------------------------------------
+alias g='git'
+alias cdgr='cd-gitroot'
+
+alias ls='lsd'
+# alias ls='exa'
+# alias l='exa -ahl --git'
+alias l='lsd -l'
+alias la='lsd -la'
+alias lat='lsd -lat'
+alias tree='exa -T'
+
+alias n='nvim'
+alias c='code'
+
+alias -g J='| jq'
+alias -g R='| rg -i'
+
+# expand global aliases by space
+# http://blog.patshead.com/2012/11/automatically-expaning-zsh-global-aliases---simplified.html
+globalias() {
+  if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
+    zle _expand_alias
+    # zle expand-word
+  fi
+  zle self-insert
+}
+zle -N globalias
+bindkey " " globalias
+
+
+# -----------------------------------------------------------------------------
+# Completion
+# -----------------------------------------------------------------------------
+autoload -Uz +X bashcompinit && bashcompinit
+autoload -Uz compinit && compinit
+
+# Github
+eval "$(gh completion -s zsh)"
+
+# Aws
+complete -C '/usr/local/bin/aws_completer' aws
+
+# Azure
+source $HOME/.zsh/completions/az.completion
+
+# Terraform
+complete -o nospace -C /home/nbchk/.tfenv/versions/1.1.9/terraform terraform
+
+# Zsh-autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=grey,bg=grey,bold,underline"
+
+# -----------------------------------------------------------------------------
+# History
+# -----------------------------------------------------------------------------
+# Set a file name that histories are saved
+export HISTFILE=~/.zsh_history
+
+# Set the number of histories are saved
+export HISTSIZE=1000000 # In memory
+export SAVEHIST=1000000 # In $HISTFILE
+
+# Save history with beginning timestamp and elapsed time
+setopt extended_history
+
+# Share histories among zsh sessions
+setopt share_history
+
+# Don't save duplicated history
+setopt hist_ignore_all_dups
+
+# Don't save history in starting with a white space
+setopt hist_ignore_space
+
+# Trim needless white spaces
+setopt hist_reduce_blanks
+
+# Don't save histories with history command
+setopt hist_no_store
+
+# -----------------------------------------------------------------------------
+# Cd
+# -----------------------------------------------------------------------------
+setopt auto_pushd
+
+
+# -----------------------------------------------------------------------------
+# Fzf
+# -----------------------------------------------------------------------------
+function fzf-select-history() {
+  BUFFER=$(history -n -r 1 | fzf --no-sort --query="$LBUFFER")
+  CURSOR=$#BUFFER
+  zle reset-prompt
+}
+zle -N fzf-select-history
+bindkey '^r' fzf-select-history
+
+function fzf-select-files() {
+  BUFFER="${LBUFFER}$(fd --type f --hidden | fzf --preview "bat  --color=always --style=header,grid --line-range :100 {}")"
+  CURSOR=$#BUFFER
+  zle reset-prompt
+}
+zle -N fzf-select-files
+bindkey '^s^f' fzf-select-files
+
+function fzf-select-dirs() {
+  BUFFER="${LBUFFER}$(fd --type d --hidden | fzf)"
+  CURSOR=$#BUFFER
+  zle reset-prompt
+}
+zle -N fzf-select-dirs
+bindkey '^s^d' fzf-select-dirs
+
+function rgv() {
+  if [ $# -eq 0 ]; then
+    echo 'Usage: rgv <search_string> <search_dir>'
+    return 1
+  fi
+
+  search_string=$1
+  search_dir=${2:-.}
+
+  search_result=$(
+    rg --smart-case --vimgrep $search_string $search_dir | \
+    fzf --delimiter=':' \
+      --preview='bat --color=always {1} -H {2} -r `expr {2} - 1`:`expr {2} + 1`'
+  )
+
+  if [ "$search_result" != '' ]; then
+    file_path=`echo $search_result | awk -F':' '{print $1}'`
+    line_number=`echo $search_result | awk -F':' '{print $2}'`
+    column_number=`echo $search_result | awk -F':' '{print $3}'`
+  else
+    return
+  fi
+
+  nvim $file_path "+call cursor($line_number, $column_number)" "+set hlsearch | let @/ = \"$search_string\""
+}
+
+function fdv() {
+  file_path=$(fd --type f --hidden | fzf --preview "bat  --color=always --style=header,grid --line-range :100 {}")
+  nvim $file_path
+}
+
+function get-gh-latest-release() {
+  if [ ! $# -eq 1 ]; then
+    echo 'Need a repo name'
+    echo 'Usage: get-gh-latest-release <repo name>'
+    return 1
+  fi
+
+  repo_name=$1
+
+  download_url=$(
+    curl "https://api.github.com/repos/${repo_name}/releases/latest" | \
+    jq -r '.assets[].browser_download_url' | \
+    fzf
+  )
+
+  file_name=$(basename $download_url)
+  curl -L "$download_url" > $file_name
+}
+
+
+# -----------------------------------------------------------------------------
+# Tmux
+# -----------------------------------------------------------------------------
+# Start the tmux session if not alraedy in the tmux session
+if [[ ! -n $TMUX  ]]; then
+  # Get the session IDs
+  session_ids="$(tmux list-sessions)"
+
+  # Create new session if no sessions exist
+  if [[ -z "$session_ids" ]]; then
+    tmux new-session
+  fi
+
+  # Select from following choices
+  #   - Attach existing session
+  #   - Create new session
+  #   - Start without tmux
+  create_new_session="Create new session"
+  start_without_tmux="Start without tmux"
+  choices="$session_ids\n${create_new_session}:\n${start_without_tmux}:"
+  choice="$(echo $choices | fzf | cut -d: -f1)"
+
+  if expr "$choice" : "[0-9]*$" >&/dev/null; then
+    # Attach existing session
+    tmux attach-session -t "$choice"
+  elif [[ "$choice" = "${create_new_session}" ]]; then
+    # Create new session
+    tmux new-session
+  elif [[ "$choice" = "${start_without_tmux}" ]]; then
+    # Start without tmux
+    :
+  fi
+fi
+
+
+# -----------------------------------------------------------------------------
+# Direnv
+# -----------------------------------------------------------------------------
+eval "$(direnv hook zsh)"

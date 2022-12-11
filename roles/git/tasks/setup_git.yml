@@ -1,0 +1,17 @@
+---
+- name: Install OS packages
+  ansible.builtin.package:
+    name: "{{ item }}"
+  with_items:
+    - git
+
+- name: Copy bin files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ user }}/.bin/{{ item }}
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0755
+  with_items:
+    - gh
+    - ghq

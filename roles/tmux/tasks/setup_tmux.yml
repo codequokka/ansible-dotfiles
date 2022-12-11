@@ -1,0 +1,16 @@
+---
+- name: Copy bin files
+  ansible.builtin.copy:
+    src: tmux
+    dest: /home/{{ user }}/.bin/
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0755
+
+- name: Copy setting files
+  ansible.builtin.copy:
+    src: tmux.conf
+    dest: /home/{{ user }}/.tmux.conf
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0644
