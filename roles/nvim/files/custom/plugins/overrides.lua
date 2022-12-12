@@ -32,6 +32,9 @@ M.mason = {
     -- Ansible
     "ansible-language-server",
 
+    -- Yaml
+    "yaml-language-server",
+
     -- shell
     "shfmt",
     "shellcheck",

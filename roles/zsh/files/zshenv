@@ -15,6 +15,7 @@ path=(
 
 fpath=(
   ~/.zsh/functions
+  ~/.zsh/completions
   $fpath
 )
 

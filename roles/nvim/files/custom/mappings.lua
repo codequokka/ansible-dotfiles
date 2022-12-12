@@ -18,9 +18,9 @@ M.general = {
   n = {
     -- Telescope
     ["<leader>S"] = { "<cmd> Telescope <CR>", "Telescope" },
-    ["<leader>Sf"] = { "<cmd> Telescope find_files <CR>", "Telescope find_files" },
-    ["<leader>Sl"] = { "<cmd> Telescope live_grep <CR>", "Telescope live_grep" },
-    ["<leader>Sb"] = { "<cmd> Telescope buffers <CR>", "Telescope buffers" },
+    ["<leader>sf"] = { "<cmd> Telescope find_files <CR>", "Telescope find_files" },
+    ["<leader>sl"] = { "<cmd> Telescope live_grep <CR>", "Telescope live_grep" },
+    ["<leader>sb"] = { "<cmd> Telescope buffers <CR>", "Telescope buffers" },
 
     -- Git
     ["<leader>gs"] = { "<cmd> Git <CR>", "Git" },
