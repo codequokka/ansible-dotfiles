@@ -3,3 +3,8 @@ user: nbchk
 group: nbchk
 shell: /usr/bin/zsh
 # public_key:
+
+git:
+  user:
+    name: Nobuchika Tanaka
+    email: codequokka@gmail.com
