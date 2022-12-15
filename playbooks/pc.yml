@@ -21,8 +21,8 @@
     - role: nvim
       tags: nvim
 
-    - role: vscode
-      tags: vscode
+    # - role: vscode
+    #   tags: vscode
 
     - role: docker
       tags: docker

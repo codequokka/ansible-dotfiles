@@ -19,7 +19,7 @@
 - name: Copy config files
   ansible.builtin.template:
     src: "{{ item }}"
-    dest: /home/{{ user }}/.{{ item | regex_replace('.j2$','') }}
+    dest: /home/{{ user }}/.{{ item | regex_replace('.j2$', '') }}
     owner: "{{ user }}"
     group: "{{ group }}"
     mode: 0644
