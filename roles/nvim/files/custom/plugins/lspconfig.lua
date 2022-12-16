@@ -4,7 +4,7 @@ local capabilities = require("plugins.configs.lspconfig").capabilities
 local lspconfig = require "lspconfig"
 
 local servers = { 
-  "ansible-language-server",
+  "ansiblels",
   "yamlls"
 }
 -- local servers = { "html", "cssls", "tsserver", "clangd", "yamlls", "pylsp" }
