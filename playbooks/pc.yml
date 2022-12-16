@@ -30,5 +30,8 @@
     - role: python3
       tags: python3
 
+    - role: nodejs
+      tags: nodejs
+
     - role: ansible
       tags: ansible

@@ -1,0 +1,12 @@
+---
+- name: Enable module
+  ansible.builtin.shell:
+    cmd: |
+      dnf module enable -y nodejs:18
+  changed_when: false
+
+- name: Install module
+  ansible.builtin.shell:
+    cmd: |
+      dnf module install -y nodejs:18/common
+  changed_when: false
