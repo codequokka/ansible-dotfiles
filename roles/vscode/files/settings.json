@@ -1,27 +1,27 @@
 {
     // Editor
-    "editor.fontFamily": "'MesloLGS NF'",
+    "editor.fontFamily": "MesloLGS NF",
     "editor.fontSize": 15,
     "editor.smoothScrolling": true,
     "editor.cursorSmoothCaretAnimation": true,
     "editor.formatOnSave": true,
     "editor.minimap.enabled": false,
-    "editor.codeActionsOnSave": {
-        "source.organizeImports": true
-    },
     // Workbench
     "workbench.list.smoothScrolling": true,
     "workbench.iconTheme": "material-icon-theme",
-    "workbench.colorTheme": "Tokyo Night",
+    "workbench.colorTheme": "Atom One Dark",
     "workbench.colorCustomizations": {
         "editor.selectionBackground": "#135564",
         "editor.selectionHighlightBackground": "#135564"
     },
-    "workbench.editor.enablePreview": false,
     // Files
     "files.insertFinalNewline": true,
-    // Terminal
-    "terminal.integrated.fontFamily": "'MesloLGS NF'",
+    "files.associations": {
+        "**/playbooks/*.yml": "ansible",
+        "**/roles/**/*.yml": "ansible",
+    },
+    // Termina
+    "terminal.integrated.fontFamily": "MesloLGS NF",
     "terminal.integrated.fontSize": 15,
     "terminal.integrated.commandsToSkipShell": [
         "-workbench.action.quickOpen",
@@ -29,7 +29,8 @@
     ],
     // Remote
     "remote.SSH.remotePlatform": {
-        "ubuntu-2204": "linux"
+        "rocky-8.7": "linux",
+        "st2-workbench-01": "linux"
     },
     // Vim
     "vim.leader": "<space>",
@@ -48,30 +49,33 @@
             ]
         }
     ],
-    // Python
-    "python.linting.enabled": true,
-    "python.linting.lintOnSave": true,
-    "python.formatting.provider": "black",
-    "python.formatting.blackArgs": [
-        "--line-length",
-        "79"
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "leader",
+                "s"
+            ],
+            "after": [
+                "leader",
+                "leader",
+                "s"
+            ]
+        }
     ],
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
-    "python.analysis.typeCheckingMode": "basic",
-    "python.analysis.diagnosticMode": "workspace",
-    //autoDocstring
-    "autoDocstring.docstringFormat": "numpy",
     // Golang
-    // "go.lintTool": "golangci-lint",
-    // "go.lintFlags": [
-    //     // "--config=${workspaceFolder}/.golangci.yaml",
-    //     // "--fast"
-    // ],
-    // "gopls": {
-    //     "ui.semanticTokens": true
-    // },
-    // "go.lintOnSave": "workspace",
+    "go.lintTool": "golangci-lint",
+    "go.lintFlags": [
+        // "--config=${workspaceFolder}/.golangci.yaml",
+        // "--fast"
+    ],
+    "gopls": {
+        "ui.semanticTokens": true
+    },
+    "go.lintOnSave": "workspace",
+    "redhat.telemetry.enabled": false,
     // "go.testOnSave": true
-    "redhat.telemetry.enabled": true,
+    // Ansible
+    "ansible.ansible.path": ".venv/bin/ansible",
+    "ansible.python.interpreterPath": ".venv/bin/python3",
+    "security.workspace.trust.untrustedFiles": "open",
 }
