@@ -14,3 +14,12 @@
     owner: "{{ user }}"
     group: "{{ group }}"
     mode: 0644
+
+- name: Install Tmux Plugin Manager
+  ansible.builtin.git:
+    repo: "https://github.com/tmux-plugins/tpm"
+    dest: /home/{{ user }}/.tmux/plugins/tpm
+    update: false
+  become: false
+  tags:
+    - skip_ansible_lint

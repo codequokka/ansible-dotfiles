@@ -33,12 +33,13 @@
     },
     // Terminal
     {
-        "key": "ctrl+\\",
+        "key": "ctrl+;",
         "command": "workbench.action.terminal.focusAtIndex1",
-        "when": "editorTextFocus"
+        // "command": "workbench.action.createTerminalEditorSide",
+        // "when": "editorTextFocus"
     },
     {
-        "key": "ctrl+\\",
+        "key": "ctrl+;",
         "command": "workbench.action.focusFirstEditorGroup",
         "when": "terminalFocus"
     },

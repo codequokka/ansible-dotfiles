@@ -7,6 +7,15 @@ return {
 
   ["tpope/vim-fugitive"] = {},
 
+  ["christoomey/vim-tmux-navigator"] = {
+    --vim.g.tmux_navigator_no_mappings = 1
+    -- noremap <silent> <a-h> :<C-U>TmuxNavigateLeft<cr>
+    -- noremap <silent> <a-j> :<C-U>TmuxNavigateDown<cr>
+    -- noremap <silent> <a-k> :<C-U>TmuxNavigateUp<cr>
+    -- noremap <silent> <a-l> :<C-U>TmuxNavigateRight<cr>
+    -- noremap <silent> <a-\> :<C-U>TmuxNavigatePrevious<cr>
+  },
+
   ["phaazon/hop.nvim"] = {
     branch = "v2",
     config = function()
