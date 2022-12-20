@@ -5,6 +5,25 @@ return {
     override_options = overrides.alphanvim,
   },
 
+  ["hrsh7th/nvim-cmp"] = {
+    -- override_options = overrides.nvimcmp,
+    override_options = function()
+      local cmp = require "cmp"
+
+      return {
+        mapping = {
+          ["<C-d>"] = cmp.mapping.scroll_docs(-8),
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        },
+      }
+    end,
+  },
+
   ["tpope/vim-fugitive"] = {},
 
   ["christoomey/vim-tmux-navigator"] = {
