@@ -7,5 +7,5 @@ $ sudo dnf install -y ansible
 ```
 
 ```
-$ ansible-playbook -i inventories/nbchk/hosts.ini playbooks/pc.yml --extra-vars='ansible_sudo_pass=99snpy99'
+$ ansible-playbook -i inventories/nbchk/hosts.ini playbooks/pc.yml --extra-vars='ansible_sudo_pass=<your-sudo-pass>'
 ```
