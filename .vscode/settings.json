@@ -1,4 +1,4 @@
 {
-    "ansible.ansible.path": ".venv/bin/ansible",
+    // Ansible
     "ansible.python.interpreterPath": ".venv/bin/python3",
 }
