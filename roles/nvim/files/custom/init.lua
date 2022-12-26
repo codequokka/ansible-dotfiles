@@ -32,3 +32,17 @@ vim.filetype.add({
 		['.*/inventory/.*%.ini'] = 'ansible_hosts',
 	},
 })
+
+-- Neovide
+local g = vim.g
+
+g.neovide_refresh_rate=75
+g.neovide_transparency=0.9
+g.neovide_cursor_animation_length=0.05
+g.neovide_cursor_trail_length=0.01
+g.neovide_cursor_vfx_mode = "pixiedust"
+g.neovide_remember_dimensions = true;
+-- g.neovide_cursor_vfx_particle_phase=1.5
+-- g.neovide_cursor_vfx_particle_curl=1.0
+g.neovide_scroll_animation_length = 0.2
+-- g.neovide_profiler = true;
