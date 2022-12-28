@@ -1,0 +1,4 @@
+---
+- name: Install the lxd snap package
+  community.general.snap:
+    name: lxd

@@ -1,0 +1,10 @@
+---
+- name: Check the lxd installed and user can execute the lxd command
+  ansible.builtin.command:
+    cmd: "{{ item }}"
+  become: true
+  become_user: "{{ user }}"
+  register: _result
+  with_items:
+    - /bin/bash -lc "lxd --version"
+  changed_when: false

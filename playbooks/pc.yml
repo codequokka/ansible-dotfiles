@@ -27,6 +27,9 @@
     - role: docker
       tags: docker
 
+    - role: lxd
+      tags: lxd
+
     - role: python3
       tags: python3
 

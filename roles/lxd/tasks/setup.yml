@@ -1,0 +1,8 @@
+---
+- name: Set up lxd
+  ansible.builtin.import_tasks: setup/lxd.yml
+  tags: setup_lxd
+
+- name: Test lxd
+  ansible.builtin.import_tasks: test/lxd.yml
+  tags: test_lxd

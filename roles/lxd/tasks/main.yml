@@ -1,0 +1,4 @@
+---
+- name: Set up lxd
+  ansible.builtin.import_tasks: setup.yml
+  tags: setup
