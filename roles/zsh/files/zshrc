@@ -29,6 +29,8 @@ zinit light zsh-users/zsh-autosuggestions
 zinit ice depth"1"
 zinit light Aloxaf/fzf-tab
 
+zinit ice depth"1"
+zinit light endaaman/lxd-completion-zsh
 
 # -----------------------------------------------------------------------------
 # Powerlevel10k

@@ -7,4 +7,5 @@
   register: _result
   with_items:
     - /bin/bash -lc "lxd --version"
+    - /bin/bash -lc "lxc --version"
   changed_when: false

@@ -2,3 +2,35 @@
 - name: Install the lxd snap package
   community.general.snap:
     name: lxd
+
+# - name: Lxd init
+#   ansible.builtin.command:
+#     cmd: "{{ item }}"
+#   with_items:
+#     - /bin/bash -lc "lxd init --minimal"
+#   changed_when: false
+# ❯ sudo /var/lib/snapd/snap/bin/lxd init
+# Would you like to use LXD clustering? (yes/no) [default=no]:
+# Do you want to configure a new storage pool? (yes/no) [default=yes]:
+# Name of the new storage pool [default=default]:
+# Name of the storage backend to use (dir, lvm, btrfs, ceph) [default=btrfs]: lvm
+# Create a new LVM pool? (yes/no) [default=yes]:
+# Would you like to use an existing empty block device (e.g. a disk or partition)? (yes/no) [default=no]:
+# Size in GiB of the new loop device (1GiB minimum) [default=9GiB]:
+# Would you like to connect to a MAAS server? (yes/no) [default=no]:
+# Would you like to create a new local network bridge? (yes/no) [default=yes]:
+# What should the new bridge be called? [default=lxdbr0]:
+# What IPv4 address should be used? (CIDR subnet notation, “auto” or “none”) [default=auto]:
+# What IPv6 address should be used? (CIDR subnet notation, “auto” or “none”) [default=auto]:
+# Would you like the LXD server to be available over the network? (yes/no) [default=no]:
+# Would you like stale cached images to be updated automatically? (yes/no) [default=yes]:
+# Would you like a YAML "lxd init" preseed to be printed? (yes/no) [default=no]:
+
+
+- name: Add users to lxd group
+  ansible.builtin.user:
+    name: "{{ item }}"
+    groups: lxd
+    append: true
+  with_items:
+    - "{{ user }}"
