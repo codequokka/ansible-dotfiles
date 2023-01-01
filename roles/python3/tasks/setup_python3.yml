@@ -11,3 +11,9 @@
     name: "{{ item }}"
   with_items:
     - pipenv
+
+- name: Install the pyenv
+  ansible.builtin.shell:
+    cmd: curl https://pyenv.run | bash
+    creates: /home/{{ user }}/.pyenv
+  become_user: "{{ user }}"
