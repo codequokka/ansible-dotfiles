@@ -1,0 +1,42 @@
+---
+- name: Install OS packages
+  ansible.builtin.package:
+    name: "{{ item }}"
+  with_items:
+    - yum-utils
+
+- name: Add OS package repository
+  ansible.builtin.yum_repository:
+    name: hashicorp
+    file: hashicorp
+    description: Hashicorp Stable - $basearch
+    baseurl: https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/stable
+    enabled: true
+    gpgcheck: true
+    gpgcakey: https://rpm.releases.hashicorp.com/gpg
+
+- name: Add OS package repository
+  ansible.builtin.yum_repository:
+    name: hashicorp-test
+    file: hashicorp
+    description: Hashicorp Test - $basearch
+    baseurl: https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/test
+    enabled: false
+    gpgcheck: true
+    gpgcakey: https://rpm.releases.hashicorp.com/gpg
+
+- name: Install OS packages
+  ansible.builtin.package:
+    name: "{{ item }}"
+  with_items:
+    - terraform
+
+- name: Copy bin files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ user }}/.bin/{{ item }}
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0755
+  with_items:
+    - tflint
