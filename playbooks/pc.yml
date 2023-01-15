@@ -38,3 +38,6 @@
 
     - role: ansible
       tags: ansible
+
+    - role: terraform
+      tags: terraform
