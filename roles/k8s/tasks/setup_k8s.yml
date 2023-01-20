@@ -1,0 +1,11 @@
+---
+- name: Copy bin files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: /home/{{ user }}/.bin/{{ item }}
+    owner: "{{ user }}"
+    group: "{{ group }}"
+    mode: 0755
+  with_items:
+    - kubectl
+    - kind

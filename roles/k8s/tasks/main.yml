@@ -1,0 +1,3 @@
+---
+- name: Set up k8s
+  ansible.builtin.import_tasks: setup_k8s.yml
