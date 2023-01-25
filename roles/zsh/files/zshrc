@@ -73,6 +73,7 @@ alias la='lsd -la'
 alias lat='lsd -lat'
 alias tree='exa -T'
 
+
 alias n='nvim'
 alias c='code'
 
@@ -274,4 +275,9 @@ eval "$(pyenv virtualenv-init -)"
 # -----------------------------------------------------------------------------
 # kubectl
 # -----------------------------------------------------------------------------
+# get zsh complete kubectl
 source <(kubectl completion zsh)
+alias kubectl='kubecolor'
+alias k='kubecolor'
+# make completion work with kubecolor
+compdef kubecolor=kubectl

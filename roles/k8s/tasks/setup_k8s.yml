@@ -9,3 +9,5 @@
   with_items:
     - kubectl
     - kind
+    - k9s
+    - kubecolor
