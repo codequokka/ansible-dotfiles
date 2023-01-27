@@ -1,0 +1,53 @@
+---
+- name: Set up my linux workstation
+  hosts: idcfc-west-workstation
+  become: true
+  pre_tasks:
+    - name: Check OS version is supported
+      ansible.builtin.assert:
+        that:
+          - ansible_facts['distribution'] == "Rocky" and ansible_facts['distribution_major_version'] == "8"
+        fail_msg: |
+          {{ ansible_facts['distribution'] }} {{ ansible_facts['distribution_major_version'] }} is currently not supported
+  roles:
+    - role: common
+      tags: common
+
+    # - role: ssh
+    #   tags: ssh
+
+    # - role: git
+    #   tags: git
+
+    # - role: tmux
+    #   tags: tmux
+
+    # - role: zsh
+    #   tags: zsh
+
+    # - role: nvim
+    #   tags: nvim
+
+    # - role: vscode
+    #   tags: vscode
+
+    # - role: docker
+    #   tags: docker
+
+    # - role: lxd
+    #   tags: lxd
+
+    # - role: python3
+    #   tags: python3
+
+    # - role: nodejs
+    #   tags: nodejs
+
+    # - role: ansible
+    #   tags: ansible
+
+    # - role: terraform
+    #   tags: terraform
+
+    # - role: k8s
+    #   tags: k8s

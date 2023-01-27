@@ -1,0 +1,9 @@
+---
+- name: Set up os packages
+  ansible.builtin.import_tasks: setup/os_packages.yml
+  tags: setup_common
+
+- name: Set up os users
+  ansible.builtin.import_tasks: setup/os_users.yml
+  no_log: true
+  tags: setup_common

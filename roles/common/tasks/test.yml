@@ -1,0 +1,8 @@
+---
+- name: Test os packages
+  ansible.builtin.import_tasks: test/os_packages.yml
+  tags: test_common
+
+- name: Test os users
+  ansible.builtin.import_tasks: test/os_users.yml
+  tags: test_common

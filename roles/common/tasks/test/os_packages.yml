@@ -1,0 +1,5 @@
+---
+- name: Check all installed OS packages are upgraded
+  ansible.builtin.command:
+    cmd: dnf check-update
+  changed_when: false

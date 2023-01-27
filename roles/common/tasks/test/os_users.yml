@@ -1,0 +1,12 @@
+---
+- name: Check OS users exsit
+  ansible.builtin.command:
+    cmd: /bin/bash -lc "whoami"
+  become_user: "{{ item.name }}"
+  with_items: "{{ os.users }}"
+  no_log: true
+  changed_when: false
+
+- name: Check OS users password changed as expected
+  ansible.builtin.debug:
+    msg: NOT INMPLMENTED!

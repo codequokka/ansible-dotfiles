@@ -1,0 +1,8 @@
+---
+- name: Upgrade all installed OS packages
+  ansible.builtin.dnf:
+    name: '*'
+    state: latest
+    update_only: true
+  when:
+    - update_os_packages
