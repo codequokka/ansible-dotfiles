@@ -7,8 +7,8 @@
     regexp: '{{ item.regexp }}'
     line: '{{ item.line }}'
   with_items:
-    - regexp: '^#?\s*PermitRootLogin'
-      line: 'PermitRootLogin no'
+    # - regexp: '^#?\s*PermitRootLogin'
+    #   line: 'PermitRootLogin no'
     - regexp: '^PasswordAuthentication yes'
       line: 'PasswordAuthentication no'
     - regexp: '^#?\s*PubkeyAuthentication'
@@ -16,7 +16,9 @@
   notify:
     - Restart sshd
 
-# - name: Add authorized key
-#   ansible.posix.authorized_key:
-#     user: "{{ user }}"
-#     key: "{{ public_key }}"
+- name: Add authorized keys
+  ansible.posix.authorized_key:
+    user: "{{ item.name }}"
+    key: "{{ item.public_key }}"
+  with_items: "{{ os.users }}"
+  no_log: true

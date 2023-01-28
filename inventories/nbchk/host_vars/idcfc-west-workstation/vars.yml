@@ -6,3 +6,5 @@ os:
     - name: nbchk
       group: nbchk
       password: "{{ vault_password }}"
+      public_key: |
+        ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDFGtYLRH9YHlXiTTpVT6UZvwczg70AFdaB8NhuN26+0QD42fjAb+H9554LFZWDm/dIhEnOG2T5HAaRCJhJ/lcYjnMCjEgLTA62eKfDuGmD8bwPT3GQa8V+jrc87c0ixviZ9uBo+KdtU7elTIzk/FMEFx397A9nwre2r374VMcxMDjecthN5Mh3SGoJM3pbymXBLUvSjKDMn1ANdc5PqdQtuEBdo7vyqQK27NvQ5zagllHql3lelu6FXrz7Z4FNCpCNGj2hdq9WkSSxizsOcjaOKFFatKbJvot0LP1K5x4aaTNAU8HXXivhscSuWZySqopFMxoaAnOXHbs+HAmimoCalgKDhf09p/0/p9JYo5gOhUkOVzK91wPa9cI2cniyyV+S/SeikCV+p8MfK3XY/uWS4fO/unPSQGR0mArAMnBzo1JkHp1mmZwCTfd/NkeRcLtBns6iVfIavIdXIR5iggxDNsujEcNRxCxZf14lUADdd+ocFitT+k4tEJ+PEr3LBD8AvI38jrTmcv8NZy2WoyccwrMsh58yUb9a/i60qin838d/TE827HqzcyZE6MXDNmcQ3Nt9zj0z7XP3jkGveOMrT7tuLxYtbdHsEImrK1GijIMJy2WQStB2CwlqS+4b7/g7oMXFWNtHuHV+OL/4yHJS5eOH2OcMUGdoWe3s4yWSsw== private

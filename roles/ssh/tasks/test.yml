@@ -1,0 +1,4 @@
+---
+- name: Set up ssh
+  ansible.builtin.import_tasks: test/ssh.yml
+  tags: test_ssh

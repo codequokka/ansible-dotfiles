@@ -13,8 +13,8 @@
     - role: common
       tags: common
 
-    # - role: ssh
-    #   tags: ssh
+    - role: ssh
+      tags: ssh
 
     # - role: git
     #   tags: git

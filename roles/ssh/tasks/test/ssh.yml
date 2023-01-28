@@ -1,0 +1,16 @@
+---
+- name: Check root user can login via ssh with public_key
+  ansible.builtin.debug:
+    msg: NOT INMPLMENTED!
+
+- name: Check root user can not login via ssh with password
+  ansible.builtin.debug:
+    msg: NOT INMPLMENTED!
+
+- name: Check general user can login via ssh with public_key
+  ansible.builtin.debug:
+    msg: NOT INMPLMENTED!
+
+- name: Check general user can not login via ssh with password
+  ansible.builtin.debug:
+    msg: NOT INMPLMENTED!
