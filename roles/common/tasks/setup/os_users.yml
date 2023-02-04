@@ -18,3 +18,12 @@
     groups: wheel
     append: true
   with_items: "{{ os.users }}"
+
+- name: Create user bin directories
+  ansible.builtin.file:
+    path: /home/{{ item.name }}/.bin
+    state: directory
+    owner: "{{ item.name }}"
+    group: "{{ item.group }}"
+    mode: 0755
+  with_items: "{{ os.users }}"

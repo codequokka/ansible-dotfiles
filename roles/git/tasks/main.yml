@@ -1,3 +1,8 @@
 ---
 - name: Set up git
-  ansible.builtin.import_tasks: setup_git.yml
+  ansible.builtin.import_tasks: setup.yml
+  tags: setup
+
+- name: Test git
+  ansible.builtin.import_tasks: test.yml
+  tags: test

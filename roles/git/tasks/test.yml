@@ -1,0 +1,4 @@
+---
+- name: Test os git
+  ansible.builtin.import_tasks: test/git.yml
+  tags: test_git

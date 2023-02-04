@@ -1,0 +1,10 @@
+---
+- name: Check git binaries exist users can execute it
+  ansible.builtin.command:
+    cmd: /bin/bash -lc "{{ item.0 }} --version"
+  become_user: "{{ item.1.name }}"
+  with_nested:
+    - [git, ~/.bin/gh, ~/.bin/ghq]
+    - "{{ os.users }}"
+  no_log: true
+  changed_when: false

@@ -6,15 +6,6 @@
     - fuse
     - "@Development tools"
 
-- name: Create bin directories
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ user }}"
-    group: "{{ group }}"
-    mode: 0755
-  with_items:
-    - /home/{{ user }}/.bin
 
 - name: Copy font files
   ansible.builtin.copy:

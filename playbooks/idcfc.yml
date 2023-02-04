@@ -16,8 +16,8 @@
     - role: ssh
       tags: ssh
 
-    # - role: git
-    #   tags: git
+    - role: git
+      tags: git
 
     # - role: tmux
     #   tags: tmux
